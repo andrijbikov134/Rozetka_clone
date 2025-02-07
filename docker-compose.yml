@@ -51,6 +51,8 @@ services:
 
   database:
     image: mysql:8.0
+    security_opt:
+    - seccomp:unconfined
     environment:
       MYSQL_ROOT_PASSWORD: XXXXXXXXXXXXXXXXXXX
       MYSQL_DATABASE: clothes_store
