@@ -1,0 +1,25 @@
+.main_container
+{
+  margin-bottom: 11rem;
+  color: black;
+}
+
+.buttons_container
+{
+  display: flex;
+  gap: 2rem ;
+  justify-content: center;
+}
+
+.buttons_container button
+{
+  background-color: blueviolet;
+}
+
+.button_buy
+{
+  margin-top: 5rem;
+  background-color: rgb(247, 156, 255);
+  width: 10rem;
+  height: 3rem;
+}

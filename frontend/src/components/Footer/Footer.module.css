@@ -1,0 +1,86 @@
+.footer_container_register
+{
+  color: black;
+  background-color: rgb(232, 232, 232);
+  height: 200px;
+  margin-top: 4rem;
+}
+
+.footer_register_title
+{
+  font-weight: bold;
+}
+
+.buton_register
+{
+  background-color: rgb(247, 156, 255);
+  color: black;
+  padding-block: 0.5rem;
+  padding-inline: 3rem;
+  border-radius: 10px;
+}
+
+.footer_container_flex
+{
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 1rem;
+  color: black;
+}
+
+.link a:link, a:visited
+{
+  color: black;
+  cursor: pointer;
+}
+
+a:link:active, a:visited:active
+{
+  color: black;
+}
+
+.footer
+{
+  width: 100%;
+  background-color: white;
+}
+
+.footer_container_column
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.about_us
+{
+  font-family: "Great Vibes", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 20px;
+}
+
+.logo img
+{
+  width: 3.125rem;
+  height: 3.125rem;
+  margin-top: 1rem;
+}
+
+.footer_year
+{
+  color: black;
+}
+
+.footer_container_register
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  padding-block: 5rem;
+}
+
+.footer_container_register:nth-child(n)
+{
+  height: auto;
+}

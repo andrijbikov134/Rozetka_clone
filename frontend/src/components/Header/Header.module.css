@@ -1,0 +1,159 @@
+.header_container_flex_search
+{
+  background-color: black;
+  height: 4.125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header_container_flex
+{
+  height: 4.6875rem;
+  background-color: white;
+  display: flex;
+  justify-content:center;
+  gap: 2rem;
+  align-items: center;
+  padding-top: 0.5rem;
+  color: black;
+  font-size: large;
+}
+
+a:link, a:visited
+{
+  color: black;
+  cursor: pointer;
+}
+
+a:link:active, a:visited:active
+{
+  color: black;
+}
+
+.header
+{
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(255,248,53,1) 0%, rgba(12,222,236,1) 100%, rgba(0,212,255,1) 100%);
+  width: 100%;
+}
+
+.header_form_search
+{
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  background-color: black;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+  height: 26px;
+}
+
+.header_form_search_input
+{
+  background-color: white;
+  color: black;
+  padding-left: 1rem;
+  padding-block: 0.65rem;
+  border-radius: 1rem;
+  border-right: none;
+  width: 25rem;
+  
+  color-scheme: normal;
+}
+
+.header_form_search_input:focus
+{
+  outline: none;
+}
+
+.header_form_search_btn
+{
+  background-color: grey;
+  color: white;
+  border-radius: 0.25rem;
+  height: 2rem;
+  width: 5rem;
+  cursor: pointer;
+}
+
+.header_img_search
+{
+  margin-left: -2.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.logo_header
+{
+  height: 3.125rem;
+  width: 3.125rem;
+  margin-left: 2rem;
+}
+
+.logo_title
+{
+  font-family: "Lemon", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: rgb(116, 70, 225) !important;
+}
+
+.logo img
+{
+  width: 6rem;
+  height: 6rem;
+}
+
+.cart
+{
+  margin-right: 2rem;
+  display: flex;
+}
+
+.img_profile
+{
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.img_cart
+{
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.count_cart
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+  height: 1rem;
+  width: 1rem;
+  background-color: rgb(247, 156, 255);
+  font-size: 0.875rem;
+  padding: 0.25rem;
+  position: relative;
+  top: -12px; left: -1rem;
+  cursor: pointer;
+}
+
+.hidden
+{
+  display: none !important;
+}
+
+.cart_profile_container
+{
+  display: flex;
+  gap: 0.5rem;
+}
+
+.profile{
+  display: flex;
+  color: white !important;
+  align-items: center;
+  gap: 1rem;
+}
