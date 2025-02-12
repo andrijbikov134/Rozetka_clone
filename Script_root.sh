@@ -2,6 +2,9 @@
 echo "Введіть ваше ім'я:"
 read username
 
+git clone https://github.com/andrijbikov134/Rozetka_clone.git
+cd ./Rozetka_clone
+
 apt update && sudo apt upgrade -y
 apt install -y apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
