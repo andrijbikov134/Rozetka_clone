@@ -2,8 +2,8 @@
 echo "Введіть ваше ім'я:"
 read username
 
-git clone https://github.com/andrijbikov134/Rozetka_clone.git
-cd ./Rozetka_clone
+#git clone https://github.com/andrijbikov134/Rozetka_clone.git
+#cd ./Rozetka_clone
 
 apt update && sudo apt upgrade -y
 apt install -y apt-transport-https ca-certificates curl software-properties-common

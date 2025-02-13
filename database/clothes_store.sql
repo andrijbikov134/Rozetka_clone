@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Час створення: Лют 06 2025 р., 14:45
+-- Час створення: Лют 12 2025 р., 17:19
 -- Версія сервера: 10.4.32-MariaDB
 -- Версія PHP: 8.2.12
 
@@ -75,17 +75,18 @@ INSERT INTO `category` (`id`, `title`) VALUES
 
 CREATE TABLE `categorysub` (
   `id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(200) NOT NULL
+  `title` varchar(200) NOT NULL,
+  `title_ua` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='categorysub';
 
 --
 -- Дамп даних таблиці `categorysub`
 --
 
-INSERT INTO `categorysub` (`id`, `title`) VALUES
-(1, 'clothes'),
-(2, 'accessories'),
-(3, 'shoes');
+INSERT INTO `categorysub` (`id`, `title`, `title_ua`) VALUES
+(1, 'clothes', 'Одяг'),
+(2, 'accessories', 'Аксесуари'),
+(3, 'shoes', 'Взуття');
 
 -- --------------------------------------------------------
 
@@ -259,8 +260,56 @@ CREATE TABLE `orderidproductid` (
   `order_id` int(11) UNSIGNED NOT NULL,
   `product_id` int(11) UNSIGNED NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` float(11,2) NOT NULL
+  `price` float(11,2) NOT NULL,
+  `size_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='orderidproductid';
+
+--
+-- Дамп даних таблиці `orderidproductid`
+--
+
+INSERT INTO `orderidproductid` (`id`, `order_id`, `product_id`, `quantity`, `price`, `size_id`) VALUES
+(1, 43, 1, 2, 0.00, 1),
+(4, 45, 1, 1, 999.00, 2),
+(5, 45, 40, 2, 999.00, 1),
+(6, 46, 1, 1, 999.00, 1),
+(7, 47, 1, 1, 999.00, 1),
+(8, 48, 1, 1, 999.00, 1),
+(9, 49, 1, 1, 999.00, 1),
+(10, 50, 1, 1, 999.00, 2),
+(11, 50, 1, 1, 999.00, 3),
+(12, 50, 44, 1, 999.00, 14),
+(13, 51, 1, 1, 999.00, 2),
+(14, 52, 47, 1, 999.00, 14),
+(15, 53, 37, 2, 999.00, 1),
+(16, 54, 1, 1, 999.00, 1),
+(17, 56, 1, 1, 999.00, 1),
+(18, 57, 1, 1, 999.00, 1),
+(19, 58, 1, 1, 999.00, 1),
+(20, 59, 1, 1, 999.00, 1),
+(21, 60, 1, 1, 999.00, 1),
+(22, 61, 1, 1, 999.00, 1),
+(23, 62, 1, 1, 999.00, 1),
+(24, 65, 1, 1, 999.00, 1),
+(25, 66, 1, 1, 999.00, 1),
+(26, 67, 1, 1, 999.00, 1),
+(27, 68, 1, 1, 999.00, 1),
+(28, 69, 1, 1, 999.00, 1),
+(29, 70, 1, 1, 999.00, 1),
+(30, 71, 1, 1, 999.00, 1),
+(31, 72, 1, 1, 999.00, 1),
+(32, 73, 1, 1, 999.00, 1),
+(33, 74, 1, 1, 999.00, 1),
+(34, 75, 1, 1, 999.00, 2),
+(35, 76, 1, 1, 999.00, 1),
+(36, 77, 1, 1, 999.00, 2),
+(37, 78, 1, 1, 999.00, 1),
+(38, 79, 1, 1, 999.00, 1),
+(39, 80, 1, 1, 999.00, 2),
+(40, 81, 1, 1, 999.00, 2),
+(41, 82, 1, 1, 999.00, 2),
+(42, 83, 1, 2, 999.00, 2),
+(43, 84, 1, 1, 999.00, 2);
 
 -- --------------------------------------------------------
 
@@ -270,12 +319,23 @@ CREATE TABLE `orderidproductid` (
 
 CREATE TABLE `orders` (
   `id` int(11) UNSIGNED NOT NULL,
-  `user_id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED DEFAULT NULL,
   `date_order` datetime NOT NULL,
   `delivery_type_id` int(11) UNSIGNED NOT NULL,
   `payment_type_id` int(11) UNSIGNED NOT NULL,
-  `recipient_id` int(11) UNSIGNED NOT NULL
+  `recipient_id` int(11) UNSIGNED NOT NULL,
+  `delivery_index` varchar(200) DEFAULT NULL,
+  `delivery_full_address` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='orders';
+
+--
+-- Дамп даних таблиці `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `date_order`, `delivery_type_id`, `payment_type_id`, `recipient_id`, `delivery_index`, `delivery_full_address`) VALUES
+(1, 5, '2025-02-09 14:42:59', 1, 1, 1, '1', 'м.Київ, вул. Академіка Ромоданова, 1'),
+(52, 5, '2025-02-12 17:33:02', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(53, 5, '2025-02-12 17:33:26', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\'');
 
 -- --------------------------------------------------------
 
@@ -493,6 +553,18 @@ CREATE TABLE `recipients` (
   `patronymic` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='recipients';
 
+--
+-- Дамп даних таблиці `recipients`
+--
+
+INSERT INTO `recipients` (`id`, `first_name`, `last_name`, `phone`, `patronymic`) VALUES
+(1, 'Ivan', 'Shevchenko', '+380961111111', ''),
+(5, 'Ivan', 'Shevchenko', '+380961111112', ''),
+(6, 'ASD', '', '+381232112312', ''),
+(7, 'dfgdf', '', '+38435345345', ''),
+(8, 'віаі', '', '+383453453453', ''),
+(9, 'фіавіа', '', '+38324324234', '');
+
 -- --------------------------------------------------------
 
 --
@@ -570,19 +642,6 @@ INSERT INTO `sizes` (`id`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблиці `tablepartorders`
---
-
-CREATE TABLE `tablepartorders` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `order_id` int(11) UNSIGNED NOT NULL,
-  `quantity` int(11) UNSIGNED NOT NULL,
-  `product_id` int(11) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='tablepartorders';
-
--- --------------------------------------------------------
-
---
 -- Структура таблиці `users`
 --
 
@@ -602,7 +661,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone`, `email`, `password`, `role_id`) VALUES
 (1, 'Retail customer', '', '+41-025-234-32-23', 'asdfsa@sda.ch', '1', 2),
-(5, 'Ivan', NULL, NULL, 'ivan@gmail.com', '$2y$10$.wT1zBQ.Y0dNJhBej4t/QuL6I5uu.g0E0oZWh9fekSV7FBnGVA5me', 2);
+(5, 'Ivan', 'Shevchenko', '+380961111111', 'ivan@gmail.com', '$2y$10$.wT1zBQ.Y0dNJhBej4t/QuL6I5uu.g0E0oZWh9fekSV7FBnGVA5me', 2);
 
 --
 -- Індекси збережених таблиць
@@ -727,14 +786,6 @@ ALTER TABLE `sizes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Індекси таблиці `tablepartorders`
---
-ALTER TABLE `tablepartorders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`),
-  ADD KEY `product_id` (`product_id`);
-
---
 -- Індекси таблиці `users`
 --
 ALTER TABLE `users`
@@ -749,7 +800,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблиці `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблиці `category`
@@ -797,13 +848,13 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT для таблиці `orderidproductid`
 --
 ALTER TABLE `orderidproductid`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT для таблиці `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT для таблиці `paymenttype`
@@ -827,13 +878,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблиці `recipients`
 --
 ALTER TABLE `recipients`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблиці `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблиці `roles`
@@ -848,16 +899,10 @@ ALTER TABLE `sizes`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT для таблиці `tablepartorders`
---
-ALTER TABLE `tablepartorders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Обмеження зовнішнього ключа збережених таблиць
@@ -903,13 +948,6 @@ ALTER TABLE `products`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
---
--- Обмеження зовнішнього ключа таблиці `tablepartorders`
---
-ALTER TABLE `tablepartorders`
-  ADD CONSTRAINT `tablepartorders_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-  ADD CONSTRAINT `tablepartorders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Обмеження зовнішнього ключа таблиці `users`

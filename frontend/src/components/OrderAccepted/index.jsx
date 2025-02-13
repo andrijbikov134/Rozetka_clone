@@ -1,17 +1,48 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './OrderAccepted.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const OrderAccepted = (props) => {
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const [data, setData] = useState({
+    products: JSON.parse(localStorage.getItem('order_petrushka_style')),
+    user: location.state.user,
+    payment_method: location.state.paymentMethod, 
+    delivery_type: location.state.delivery_type, 
+    recipient: location.state.recipient, 
+    delivery: location.state.delivery
+  });
+
+  const [orderId, setOrderId] = useState(0);
 
   const handlerOnClickGoHomePage = () =>
   {
     navigate('/');
   }
 
+  const saveOrderToDB = () =>
+  {
+    let array = JSON.parse(localStorage.getItem('order_petrushka_style')) || [];
+    if(array.length != 0)
+    {
+      fetch(`${props.localhost}/index.php?action=createOrder`, {
+        method: 'POST',
+        header: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      .then(response => response.text())
+      .then(response => console.log(response)
+      );
+    }
+    
+  }
+
   useEffect(() => {
+    
+    saveOrderToDB();
     localStorage.setItem('order_petrushka_style', JSON.stringify([]));
     props.updateCart();
     return () => {
@@ -30,7 +61,7 @@ const OrderAccepted = (props) => {
         <h3>Ваше замовлення успішно прийнято.</h3>
         <div className={styles.order_container_info}>
           <div className={styles.grid_ceil}>Замовлення №:</div>
-          <div className={styles.grid_ceil}>1</div>
+          <div className={styles.grid_ceil}>{orderId}</div>
           <div className={styles.grid_ceil}>Дата:</div>
           <div className={styles.grid_ceil}>{currentDate}</div>
         </div>
