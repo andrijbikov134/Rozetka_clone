@@ -50,10 +50,10 @@ function App()
   const [currentUser, setCurrentUser] = useState(0);
 
   //const localhostFrontend = 'http://localhost:5173';
-  const localhostFrontend = 'https://192.168.0.113:8080';
+  const localhostFrontend = 'https://192.168.0.113';
 
   //const localhost = 'http://localhost:8888';
-  const localhost = 'https://192.168.0.113:8080/api';
+  const localhost = 'https://192.168.0.113/api';
 
   // Функція для разового створення JSON-файла
   const saveToLocalStorage = (key, array) =>

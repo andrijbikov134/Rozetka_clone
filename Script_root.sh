@@ -29,7 +29,7 @@ usermod -aG docker ${username}
 
 apt install iptables-persistent -y
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
@@ -50,5 +50,8 @@ openssl req -newkey rsa:2048 -nodes -keyout ./database/certs/mysql-server.key \
     -x509 -days 365 -out ./database/certs/mysql-server.crt \
     -subj "/CN=localhost"
 cp ./database/certs/mysql-server.crt ./database/certs/mysql-ca.pem
+
+htpasswd -c ./proxy/.htpasswd admin
+cat ./proxy/.htpasswd
 
 chown -R ${username}:${username} ../Rozetka_clone
