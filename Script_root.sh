@@ -51,6 +51,7 @@ openssl req -newkey rsa:2048 -nodes -keyout ./database/certs/mysql-server.key \
     -subj "/CN=localhost"
 cp ./database/certs/mysql-server.crt ./database/certs/mysql-ca.pem
 
+apt install apache2-utils
 htpasswd -c ./proxy/.htpasswd admin
 cat ./proxy/.htpasswd
 
