@@ -157,7 +157,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_AUTH_ANONYMOUS_ENABLED=false
       - GF_AUTH_DISABLE_SIGNUP=true
-      - GF_SERVER_ROOT_URL=https://192.168.0.113/grafana/
+      - GF_SERVER_ROOT_URL=https://34.57.208.213/grafana/
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
       - GF_SERVER_PROTOCOL=https
     volumes:
