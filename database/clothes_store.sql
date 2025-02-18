@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Час створення: Лют 12 2025 р., 17:19
+-- Час створення: Лют 18 2025 р., 16:35
 -- Версія сервера: 10.4.32-MariaDB
 -- Версія PHP: 8.2.12
 
@@ -269,47 +269,13 @@ CREATE TABLE `orderidproductid` (
 --
 
 INSERT INTO `orderidproductid` (`id`, `order_id`, `product_id`, `quantity`, `price`, `size_id`) VALUES
-(1, 43, 1, 2, 0.00, 1),
-(4, 45, 1, 1, 999.00, 2),
-(5, 45, 40, 2, 999.00, 1),
-(6, 46, 1, 1, 999.00, 1),
-(7, 47, 1, 1, 999.00, 1),
-(8, 48, 1, 1, 999.00, 1),
-(9, 49, 1, 1, 999.00, 1),
-(10, 50, 1, 1, 999.00, 2),
-(11, 50, 1, 1, 999.00, 3),
-(12, 50, 44, 1, 999.00, 14),
-(13, 51, 1, 1, 999.00, 2),
+(1, 1, 1, 2, 0.00, 1),
 (14, 52, 47, 1, 999.00, 14),
 (15, 53, 37, 2, 999.00, 1),
-(16, 54, 1, 1, 999.00, 1),
-(17, 56, 1, 1, 999.00, 1),
-(18, 57, 1, 1, 999.00, 1),
-(19, 58, 1, 1, 999.00, 1),
-(20, 59, 1, 1, 999.00, 1),
-(21, 60, 1, 1, 999.00, 1),
-(22, 61, 1, 1, 999.00, 1),
-(23, 62, 1, 1, 999.00, 1),
-(24, 65, 1, 1, 999.00, 1),
-(25, 66, 1, 1, 999.00, 1),
-(26, 67, 1, 1, 999.00, 1),
-(27, 68, 1, 1, 999.00, 1),
-(28, 69, 1, 1, 999.00, 1),
-(29, 70, 1, 1, 999.00, 1),
-(30, 71, 1, 1, 999.00, 1),
-(31, 72, 1, 1, 999.00, 1),
-(32, 73, 1, 1, 999.00, 1),
-(33, 74, 1, 1, 999.00, 1),
-(34, 75, 1, 1, 999.00, 2),
-(35, 76, 1, 1, 999.00, 1),
-(36, 77, 1, 1, 999.00, 2),
-(37, 78, 1, 1, 999.00, 1),
-(38, 79, 1, 1, 999.00, 1),
-(39, 80, 1, 1, 999.00, 2),
-(40, 81, 1, 1, 999.00, 2),
-(41, 82, 1, 1, 999.00, 2),
-(42, 83, 1, 2, 999.00, 2),
-(43, 84, 1, 1, 999.00, 2);
+(72, 108, 1, 1, 999.00, 1),
+(73, 109, 37, 1, 999.00, 1),
+(74, 110, 3, 1, 3499.00, 1),
+(75, 111, 3, 1, 3499.00, 1);
 
 -- --------------------------------------------------------
 
@@ -335,7 +301,11 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `user_id`, `date_order`, `delivery_type_id`, `payment_type_id`, `recipient_id`, `delivery_index`, `delivery_full_address`) VALUES
 (1, 5, '2025-02-09 14:42:59', 1, 1, 1, '1', 'м.Київ, вул. Академіка Ромоданова, 1'),
 (52, 5, '2025-02-12 17:33:02', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
-(53, 5, '2025-02-12 17:33:26', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\'');
+(53, 5, '2025-02-12 17:33:26', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(108, NULL, '2025-02-16 16:27:36', 1, 2, 19, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(109, NULL, '2025-02-16 16:29:48', 1, 2, 20, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(110, NULL, '2025-02-18 12:12:25', 1, 2, 21, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(111, NULL, '2025-02-18 17:24:19', 1, 2, 22, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\'');
 
 -- --------------------------------------------------------
 
@@ -472,7 +442,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `color_id`, `brand_id`, `price`, `material_id`, `country_product_id`, `part_number`, `pictures_path`, `comment_id`, `category_id`, `category_sub_id`, `category_sub_sub_id`) VALUES
-(1, 'Футболка бавовняна жіноча Puma', 2, 3, 999.00, 1, 1, '4066757286810', '/img/women/clothes/t_shirts/1.png', 0, 1, 1, 19),
+(1, 'Футболка  жіноча Puma', 2, 3, 999.00, 1, 1, '4066757286810', '/img/women/clothes/t_shirts/1.png', 0, 1, 1, 19),
 (2, 'Пуховик чоловічий Protective Down Parka', 2, 2, 3999.00, 1, 1, '4067981263318', '/img/women/clothes/down_jackets/1.png', 0, 2, 1, 8),
 (3, 'Зимова куртка Outerwear Boy Kids', 1, 2, 3499.00, 1, 2, '4067981263318', '/img/women/clothes/jackets/1.png', 0, 1, 1, 1),
 (4, 'Футболка бавовняна жіноча 3 S Baby Tee', 1, 1, 1000.00, 1, 2, '4066757286810', '/img/women/clothes/t_shirts/1.png', 0, 1, 1, 19),
@@ -563,7 +533,20 @@ INSERT INTO `recipients` (`id`, `first_name`, `last_name`, `phone`, `patronymic`
 (6, 'ASD', '', '+381232112312', ''),
 (7, 'dfgdf', '', '+38435345345', ''),
 (8, 'віаі', '', '+383453453453', ''),
-(9, 'фіавіа', '', '+38324324234', '');
+(9, 'фіавіа', '', '+38324324234', ''),
+(10, '02', '02', '+380000000000', '02'),
+(11, 'пра', '', '+386767686787', ''),
+(12, 'р', '', '+38797898798', ''),
+(13, 'asdASD', 'asdASD', '+38345345345', 'ASDaSD'),
+(14, 'asdsa', '', '+38123123123', ''),
+(15, 'dsfsdf', '', '+384353453454', ''),
+(16, 'dsfsdf', '', '+38324234234', ''),
+(17, 'asdasd', '', '+3823132123', ''),
+(18, 'hjjkk', '', '+385678999878', ''),
+(19, 'dfgd', '', '+38546456546', ''),
+(20, 'gfd', '', '+3843534545', ''),
+(21, 'fsdfsd', '', '+3832343423', ''),
+(22, 'sdf', '', '+38323243423', '');
 
 -- --------------------------------------------------------
 
@@ -587,7 +570,8 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `comment`, `user_id`, `product_id`, `grade`, `advantages`, `disadvantages`, `datereview`) VALUES
-(9, 'It\'s good.', 1, 1, 5, 'It\'s good.', 'Don\'t have.', '2025-02-02');
+(9, 'It\'s good.', 5, 1, 5, 'It\'s good.', 'Don\'t have.', '2025-02-02'),
+(11, 'Черевики зручні, але білий колір не для тих хто полюбляє гуляє пішки, тому врахуйте коли обиратимете)))', 1, 64, 4, 'Зручні та комфортні, устілка м\'яка, для мене це перевага.', 'Білий колір.', '2025-02-13');
 
 -- --------------------------------------------------------
 
@@ -660,7 +644,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone`, `email`, `password`, `role_id`) VALUES
-(1, 'Retail customer', '', '+41-025-234-32-23', 'asdfsa@sda.ch', '1', 2),
+(1, 'root', NULL, NULL, 'root@sda.ch', '$2y$10$s2gixzBgWU.TNQ14NcdmFewSeSqHRccXlUrFEax0csyi2RQQqCYku', 1),
 (5, 'Ivan', 'Shevchenko', '+380961111111', 'ivan@gmail.com', '$2y$10$.wT1zBQ.Y0dNJhBej4t/QuL6I5uu.g0E0oZWh9fekSV7FBnGVA5me', 2);
 
 --
@@ -848,13 +832,13 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT для таблиці `orderidproductid`
 --
 ALTER TABLE `orderidproductid`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT для таблиці `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT для таблиці `paymenttype`
@@ -878,13 +862,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблиці `recipients`
 --
 ALTER TABLE `recipients`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT для таблиці `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблиці `roles`
@@ -902,7 +886,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Обмеження зовнішнього ключа збережених таблиць
