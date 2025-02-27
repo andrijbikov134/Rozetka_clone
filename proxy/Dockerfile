@@ -1,6 +1,6 @@
 # proxy/Dockerfile
 FROM nginx:latest
-COPY ./certs /etc/nginx/certs
+COPY ./certs /etc/letsencrypt
 COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./.htpasswd /etc/nginx/.htpasswd 
 COPY ./custom_404.html /usr/share/nginx/html/custom_404.html
