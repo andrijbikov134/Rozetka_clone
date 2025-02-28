@@ -28,6 +28,8 @@ import Login from './components/LogInRegister/Login';
 import Register from './components/LogInRegister/Register';
 import Logout from './components/Logout';
 import { CurrentUserContext } from './context';
+import ProductNewEdit from './components/ProductNewEdit';
+import ProfilePage from './components/ProfilePage';
 
 
 function App()
@@ -51,10 +53,10 @@ function App()
   const [currentUser, setCurrentUser] = useState(0);
 
   //const localhostFrontend = 'http://localhost:5173';
-  const localhostFrontend = 'https://34.57.208.213';
+  const localhostFrontend = 'https://nfv.pp.ua/';
 
   //const localhost = 'http://localhost:8888';
-  const localhost = 'https://34.57.208.213/api';
+  const localhost = 'https://nfv.pp.ua/api/';
 
   // Функція для разового створення JSON-файла
   const saveToLocalStorage = (key, array) =>
@@ -262,7 +264,7 @@ function App()
 
 
             <Route path='/search_result' element={<ListProductsSearchResult products={foundProducts} search_title={searchTitle} localhostFrontend={localhostFrontend} handlerOnClickProduct={handlerOnClickProduct}/>}/>
-            <Route path='/profile'    />
+            <Route path='/profile/*' element={<ProfilePage user={currentUser} localhost={localhost} localhostFrontend={localhostFrontend} loadCurrentUser={loadCurrentUser}/>}  />
             <Route path='/cart' element={<Cart currentUser={currentUser} handlerOnClickDelete={handlerOnClickDelete} updateCart={updateCart} localhost={localhost} localhostFrontend={localhostFrontend}/>}     />
             <Route path='/shops' element={<Shops/>}/>
             <Route path='/contacts' element={<Contacts/>}/>
@@ -278,6 +280,8 @@ function App()
             <Route path='/login' element={<Login localhost={localhost} loadCurrentUser={loadCurrentUser}/>}/>
             <Route path='/register' element={<Register localhost={localhost}/>}/>
             <Route path='/logout' element={<Logout loadCurrentUser={loadCurrentUser}/>}/>
+
+            <Route path='/addnewproduct' element={<ProductNewEdit localhost={localhost}/>}/>
           </Routes>
         </div>
         <Footer localhostFrontend={localhostFrontend}/>
