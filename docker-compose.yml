@@ -3,6 +3,9 @@ services:
   frontend:
     build:
       context: ./frontend
+    volumes:
+      - ./frontend:/app:consistent
+      - /app/node_modules
     ports:
       - "127.0.0.1:5173:5173"
     depends_on:
@@ -25,6 +28,8 @@ services:
   backend:
     build:
       context: ./backend
+    volumes:
+      - ./backend:/app:consistent  
     ports:
       - "127.0.0.1:8888:8888"
     depends_on:
@@ -107,7 +112,6 @@ services:
       context: ./proxy
     ports:
       - "443:443"
-      - "80:80"
     depends_on:
       - frontend
       - backend
