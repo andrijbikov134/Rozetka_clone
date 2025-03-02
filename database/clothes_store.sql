@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Час створення: Лют 28 2025 р., 11:56
+-- Час створення: Бер 01 2025 р., 09:49
 -- Версія сервера: 10.4.32-MariaDB
 -- Версія PHP: 8.2.12
 
@@ -285,7 +285,9 @@ INSERT INTO `orderidproductid` (`id`, `order_id`, `product_id`, `quantity`, `pri
 (91, 120, 122, 1, 856.00, 4),
 (92, 120, 127, 1, 1234.00, 1),
 (93, 120, 116, 3, 899.00, 1),
-(94, 120, 117, 1, 899.00, 1);
+(94, 120, 117, 1, 899.00, 1),
+(95, 121, 98, 1, 1799.00, 5),
+(96, 121, 98, 1, 1799.00, 6);
 
 -- --------------------------------------------------------
 
@@ -313,7 +315,8 @@ INSERT INTO `orders` (`id`, `user_id`, `date_order`, `delivery_type_id`, `paymen
 (117, 5, '2025-02-28 11:04:43', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
 (118, NULL, '2025-02-28 12:48:32', 1, 2, 26, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
 (119, NULL, '2025-02-28 12:49:41', 1, 2, 27, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
-(120, NULL, '2025-02-28 12:51:03', 1, 2, 28, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\'');
+(120, NULL, '2025-02-28 12:51:03', 1, 2, 28, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(121, 5, '2025-02-28 17:13:08', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\'');
 
 -- --------------------------------------------------------
 
@@ -571,7 +574,10 @@ INSERT INTO `productidsizeid` (`id`, `productid`, `sizeid`) VALUES
 (296, 132, 12),
 (297, 133, 1),
 (298, 133, 5),
-(299, 133, 9);
+(299, 133, 9),
+(303, 135, 1),
+(304, 135, 5),
+(305, 135, 9);
 
 -- --------------------------------------------------------
 
@@ -699,7 +705,8 @@ INSERT INTO `products` (`id`, `title`, `color_id`, `brand_id`, `price`, `materia
 (130, 'Шорти жіночі Adidas', 10, 4, 899.00, 1, 2, 'nfv-8935296', 'img/women/clothes/shorts/1740739321093.jpg', 1, 1, 7, NULL, 0),
 (131, 'Штани жіночі Sincerely', 6, 9, 1123.00, 3, 1, 'nfv-438953', 'img/women/clothes/pants/1740739519537.jpg', 1, 1, 4, NULL, 0),
 (132, 'Штани жіночі Nike', 5, 8, 899.00, 1, 2, 'nfv-932578', 'img/women/clothes/pants/1740739561966.jpg', 1, 1, 4, NULL, 0),
-(133, 'Штани жіночі Adidas', 12, 4, 1599.00, 3, 2, 'nfv-893487', 'img/women/clothes/pants/1740739614069.jpg', 1, 1, 4, NULL, 0);
+(133, 'Штани жіночі Adidas', 12, 4, 1599.00, 3, 2, 'nfv-893487', 'img/women/clothes/pants/1740739614069.jpg', 1, 1, 4, NULL, 0),
+(135, 'Тест3', 6, 6, 233.00, 1, 2, 'іваі', 'img/women/clothes/windbreakers/1740755806596.jpg', 1, 1, 52, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -762,6 +769,13 @@ CREATE TABLE `reviews` (
   `disadvantages` varchar(200) NOT NULL,
   `datereview` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='reviews';
+
+--
+-- Дамп даних таблиці `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `comment`, `user_id`, `product_id`, `grade`, `advantages`, `disadvantages`, `datereview`) VALUES
+(20, 'вапвап', 5, 98, 5, 'авпвап', 'вапвап', '2025-02-28');
 
 -- --------------------------------------------------------
 
@@ -867,8 +881,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone`, `email`, `password`, `role_id`, `patronymic`, `gender`, `birthday`, `city`) VALUES
-(1, 'root', NULL, NULL, 'root@sda.ch', '$2y$10$s2gixzBgWU.TNQ14NcdmFewSeSqHRccXlUrFEax0csyi2RQQqCYku', 1, '', 'male', '1970-01-01 16:28:09', ''),
-(5, 'Іван', 'Шевченко', '+380961111111', 'ivan@gmail.com', '$2y$10$.wT1zBQ.Y0dNJhBej4t/QuL6I5uu.g0E0oZWh9fekSV7FBnGVA5me', 2, 'Петрович', 'male', '1970-02-14 00:00:00', 'Київ');
+(1, 'root', NULL, NULL, 'root@sda.ch', '$2y$10$Rb..Z9toOkw.kKpOzB/UruXw11W/X5SVzeuwyvic8U0wjaa8lJM9i', 1, '', 'male', '1970-01-01 16:28:09', ''),
+(5, 'Іван', 'Шевченко', '+380961111111', 'ivan@gmail.com', '$2y$10$yXj69y/wzf.sMYZgn1CEleT/YQJsUDRW6VxnUzR6UJR2E6znSlO4u', 2, 'Петрович', 'male', '1970-02-14 00:00:00', 'Київ');
 
 --
 -- Індекси збережених таблиць
@@ -1055,13 +1069,13 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT для таблиці `orderidproductid`
 --
 ALTER TABLE `orderidproductid`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT для таблиці `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT для таблиці `paymenttype`
@@ -1073,13 +1087,13 @@ ALTER TABLE `paymenttype`
 -- AUTO_INCREMENT для таблиці `productidsizeid`
 --
 ALTER TABLE `productidsizeid`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=300;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
 
 --
 -- AUTO_INCREMENT для таблиці `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT для таблиці `recipients`
@@ -1091,7 +1105,7 @@ ALTER TABLE `recipients`
 -- AUTO_INCREMENT для таблиці `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT для таблиці `roles`
