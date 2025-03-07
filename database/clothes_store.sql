@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Час створення: Бер 01 2025 р., 09:49
+-- Час створення: Бер 07 2025 р., 09:32
 -- Версія сервера: 10.4.32-MariaDB
 -- Версія PHP: 8.2.12
 
@@ -287,7 +287,10 @@ INSERT INTO `orderidproductid` (`id`, `order_id`, `product_id`, `quantity`, `pri
 (93, 120, 116, 3, 899.00, 1),
 (94, 120, 117, 1, 899.00, 1),
 (95, 121, 98, 1, 1799.00, 5),
-(96, 121, 98, 1, 1799.00, 6);
+(96, 121, 98, 1, 1799.00, 6),
+(97, 122, 4, 1, 1007.00, 1),
+(98, 123, 125, 1, 799.00, 6),
+(99, 124, 98, 1, 1799.00, 5);
 
 -- --------------------------------------------------------
 
@@ -316,7 +319,11 @@ INSERT INTO `orders` (`id`, `user_id`, `date_order`, `delivery_type_id`, `paymen
 (118, NULL, '2025-02-28 12:48:32', 1, 2, 26, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
 (119, NULL, '2025-02-28 12:49:41', 1, 2, 27, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
 (120, NULL, '2025-02-28 12:51:03', 1, 2, 28, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
-(121, 5, '2025-02-28 17:13:08', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\'');
+(121, 5, '2025-02-28 17:13:08', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(122, NULL, '2025-03-01 13:58:08', 1, 2, 29, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(123, NULL, '2025-03-01 13:58:44', 1, 2, 30, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(124, 5, '2025-03-06 17:49:24', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\''),
+(125, 5, '2025-03-06 17:49:51', 1, 1, 1, '', 'м. Київ, вул. Хрещатик, 300, ТРЦ \'Ocean\'');
 
 -- --------------------------------------------------------
 
@@ -574,10 +581,7 @@ INSERT INTO `productidsizeid` (`id`, `productid`, `sizeid`) VALUES
 (296, 132, 12),
 (297, 133, 1),
 (298, 133, 5),
-(299, 133, 9),
-(303, 135, 1),
-(304, 135, 5),
-(305, 135, 9);
+(299, 133, 9);
 
 -- --------------------------------------------------------
 
@@ -599,7 +603,7 @@ CREATE TABLE `products` (
   `category_sub_id` int(11) UNSIGNED NOT NULL,
   `category_sub_sub_id` int(11) UNSIGNED NOT NULL,
   `price_with_discount` float(10,2) DEFAULT NULL,
-  `new_product` int(1) NOT NULL
+  `new_product` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='products';
 
 --
@@ -607,16 +611,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `title`, `color_id`, `brand_id`, `price`, `material_id`, `country_product_id`, `part_number`, `pictures_path`, `category_id`, `category_sub_id`, `category_sub_sub_id`, `price_with_discount`, `new_product`) VALUES
-(1, 'Куртка жіноча Puma', 6, 3, 2999.00, 3, 2, 'nfv-112233', 'img/women/clothes/jackets/1740674760287.jpg', 1, 1, 1, NULL, 0),
+(1, 'Куртка жіноча Puma', 6, 3, 2999.00, 3, 2, 'nfv-112233', 'img/women/clothes/jackets/1740674760287.jpg', 1, 1, 1, 2549.00, 1),
 (2, 'Пуховик чоловічий Protective Down Parka', 2, 2, 3999.00, 1, 1, '4067981263318', '', 2, 1, 8, NULL, 0),
 (4, 'Футболка жіноча Adidas', 6, 4, 1007.00, 3, 2, 'nfv-893453', 'img/women/clothes/tshirts/1740738926386.jpg', 1, 1, 19, NULL, 0),
 (6, 'Толстовка на флісі для хлопчика Nike', 2, 2, 1449.00, 1, 2, '197598790403', '', 3, 1, 18, NULL, 0),
-(11, 'Штани жіночі Puma', 4, 3, 999.00, 1, 2, 'nfv-839453', 'img/women/clothes/pants/1740739382370.jpg', 1, 1, 4, NULL, 0),
-(12, 'Шорти жіночі Puma', 3, 3, 1595.00, 1, 2, 'nfv-892353', 'img/women/clothes/shorts/1740739159094.jpg', 1, 1, 7, NULL, 0),
-(13, 'Майка жіноча Puma', 14, 3, 899.00, 3, 2, 'nfv-489358', 'img/women/clothes/jerseys/1740737861048.jpg', 1, 1, 10, NULL, 0),
-(14, 'Рубашка бавовняна жіноча Puma', 2, 3, 1199.00, 1, 1, '4066757286810', 'img/women/clothes/shirts/1740731598618.jpg', 1, 1, 13, NULL, 0),
-(15, 'Толстовка жіноча Puma', 4, 3, 1199.00, 1, 2, 'nfv-894354', 'img/women/clothes/sweatshirts/1740738781386.jpg', 1, 1, 16, NULL, 0),
-(16, 'Термобілизна жіноча Columbia', 6, 2, 999.00, 3, 2, 'nfv-345325', 'img/women/clothes/thermalunderwear/1740738578839.jpg', 1, 1, 22, NULL, 0),
+(11, 'Штани жіночі Puma', 4, 3, 999.00, 1, 2, 'nfv-839453', 'img/women/clothes/pants/1740739382370.jpg', 1, 1, 4, NULL, 1),
+(12, 'Шорти жіночі Puma', 3, 3, 1595.00, 1, 2, 'nfv-892353', 'img/women/clothes/shorts/1740739159094.jpg', 1, 1, 7, NULL, 1),
+(13, 'Майка жіноча Puma', 14, 3, 899.00, 3, 2, 'nfv-489358', 'img/women/clothes/jerseys/1740737861048.jpg', 1, 1, 10, 719.00, 0),
+(14, 'Рубашка бавовняна жіноча Puma', 2, 3, 1199.00, 1, 1, '4066757286810', 'img/women/clothes/shirts/1740731598618.jpg', 1, 1, 13, NULL, 1),
+(15, 'Толстовка жіноча Puma', 4, 3, 1199.00, 1, 2, 'nfv-894354', 'img/women/clothes/sweatshirts/1740738781386.jpg', 1, 1, 16, NULL, 1),
+(16, 'Термобілизна жіноча Columbia', 6, 2, 999.00, 3, 2, 'nfv-345325', 'img/women/clothes/thermalunderwear/1740738578839.jpg', 1, 1, 22, 799.00, 1),
 (17, 'Куртка чоловіча Puma', 2, 3, 2459.00, 1, 1, '4066757286810', '', 2, 1, 2, NULL, 0),
 (18, 'Штани чоловічі Puma', 2, 3, 899.00, 1, 1, '4066757286810', '', 2, 1, 5, NULL, 0),
 (19, 'Майка бавовняна чоловіча Puma', 2, 3, 599.00, 1, 1, '4066757286810', '', 2, 1, 11, NULL, 0),
@@ -668,10 +672,10 @@ INSERT INTO `products` (`id`, `title`, `color_id`, `brand_id`, `price`, `materia
 (65, 'Кеди чоловічі Nike ACF Watercat', 4, 8, 999.00, 4, 1, '4066757286810', '', 2, 3, 45, NULL, 0),
 (66, 'Кросівки чоловічі Nike ACG Mountain', 3, 8, 999.00, 4, 1, '4066757286810', '', 2, 3, 50, NULL, 0),
 (67, 'Кросівки чоловічі Nike React SFB Carbon', 3, 8, 2999.00, 4, 1, '4066757286810', '', 2, 3, 50, NULL, 0),
-(89, 'Куртка жіноча Columbia', 6, 2, 3499.00, 3, 2, 'nfv-223311', 'img/women/clothes/jackets/1740737576736.jpg', 1, 1, 1, NULL, 0),
-(96, 'Куртка жіноча H&M', 6, 6, 1899.00, 3, 2, 'nfv-123412', 'img/women/clothes/jackets/1740726364059.jpg', 1, 1, 1, NULL, 0),
+(89, 'Куртка жіноча Columbia', 6, 2, 3499.00, 3, 2, 'nfv-223311', 'img/women/clothes/jackets/1740737576736.jpg', 1, 1, 1, 3149.00, 0),
+(96, 'Куртка жіноча H&M', 6, 6, 1899.00, 3, 2, 'nfv-123412', 'img/women/clothes/jackets/1740726364059.jpg', 1, 1, 1, 1671.00, 0),
 (97, 'Куртка жіноча long Puma', 6, 3, 2389.00, 3, 3, 'nfv-412342', 'img/women/clothes/jackets/1740726463770.jpg', 1, 1, 1, NULL, 0),
-(98, 'Вітровка жіноча Colin\'s', 5, 5, 1799.00, 3, 1, 'nfv-435345', 'img/women/clothes/windbreakers/1740736447230.jpg', 1, 1, 52, NULL, 0),
+(98, 'Вітровка жіноча Colin\'s', 5, 5, 1799.00, 3, 1, 'nfv-435345', 'img/women/clothes/windbreakers/1740736447230.jpg', 1, 1, 52, 1439.00, 1),
 (100, 'Вітровка жіноча Puma', 3, 3, 1399.00, 3, 1, 'nfv-324325', 'img/women/clothes/windbreakers/1740737174751.jpg', 1, 1, 52, NULL, 0),
 (101, 'Куртка жіноча Columbia', 6, 2, 899.00, 3, 2, 'nfv-343584', 'img/women/clothes/windbreakers/1740737224897.jpg', 1, 1, 52, NULL, 0),
 (102, 'Куртка жіноча Columbia', 15, 2, 1599.00, 3, 3, 'nfv-438543', 'img/women/clothes/windbreakers/1740737275288.jpg', 1, 1, 52, NULL, 0),
@@ -683,10 +687,10 @@ INSERT INTO `products` (`id`, `title`, `color_id`, `brand_id`, `price`, `materia
 (108, 'Легінси жіночі Puma', 1, 3, 989.00, 3, 2, 'nfv-874335', 'img/women/clothes/leggings/1740737708573.jpg', 1, 1, 54, NULL, 0),
 (109, 'Легінси жіночі Adidas', 14, 4, 1199.00, 3, 3, 'nfv-895432', 'img/women/clothes/leggings/1740737759543.jpg', 1, 1, 54, NULL, 0),
 (110, 'Легінси жіночі Nike', 6, 8, 1099.00, 1, 1, 'nfv-843951', 'img/women/clothes/leggings/1740737797941.jpg', 1, 1, 54, NULL, 0),
-(111, 'Майка жіноча other', 15, 9, 499.00, 1, 1, 'nfv-435831', 'img/women/clothes/jerseys/1740737913006.jpg', 1, 1, 10, NULL, 0),
-(112, 'Майка жіноча Nike', 14, 8, 799.00, 1, 2, 'nfv-782930', 'img/women/clothes/jerseys/1740737971136.jpg', 1, 1, 10, NULL, 0),
-(113, 'Сорочка жіноча Holiday', 3, 9, 999.00, 1, 1, 'nfv-893248', 'img/women/clothes/shirts/1740738071694.jpg', 1, 1, 13, NULL, 0),
-(114, 'Сорочка жіноча Perfect', 14, 1, 959.00, 3, 1, 'nfv-479828', 'img/women/clothes/shirts/1740738161394.jpg', 1, 1, 13, NULL, 0),
+(111, 'Майка жіноча other', 15, 9, 499.00, 1, 1, 'nfv-435831', 'img/women/clothes/jerseys/1740737913006.jpg', 1, 1, 10, 399.00, 0),
+(112, 'Майка жіноча Nike', 14, 8, 799.00, 1, 2, 'nfv-782930', 'img/women/clothes/jerseys/1740737971136.jpg', 1, 1, 10, 639.00, 0),
+(113, 'Сорочка жіноча Holiday', 3, 9, 999.00, 1, 1, 'nfv-893248', 'img/women/clothes/shirts/1740738071694.jpg', 1, 1, 13, NULL, 1),
+(114, 'Сорочка жіноча Perfect', 14, 1, 959.00, 3, 1, 'nfv-479828', 'img/women/clothes/shirts/1740738161394.jpg', 1, 1, 13, NULL, 1),
 (115, 'Сорочка жіноча Amazing', 14, 9, 759.00, 1, 3, 'nfv-843958', 'img/women/clothes/shirts/1740738239606.jpg', 1, 1, 13, NULL, 0),
 (116, 'Спідниця жіноча Perfect', 6, 9, 899.00, 1, 1, 'nfv-398453', 'img/women/clothes/skirts/1740738319919.jpg', 1, 1, 55, NULL, 0),
 (117, 'Спідниця жіноча Modern', 7, 9, 899.00, 1, 3, 'nfv-893543', 'img/women/clothes/skirts/1740738372103.jpg', 1, 1, 55, NULL, 0),
@@ -699,14 +703,13 @@ INSERT INTO `products` (`id`, `title`, `color_id`, `brand_id`, `price`, `materia
 (124, 'Толстовка жіноча Nike', 5, 8, 967.00, 3, 1, 'nfv-893453', 'img/women/clothes/sweatshirts/1740738872329.jpg', 1, 1, 16, NULL, 0),
 (125, 'Футболка жіноча Columbia', 6, 2, 799.00, 3, 2, 'nfv-983453', 'img/women/clothes/tshirts/1740738966296.jpg', 1, 1, 19, NULL, 0),
 (126, 'Футболка жіноча Lady Life', 3, 9, 998.00, 1, 2, 'nfv-435834', 'img/women/clothes/tshirts/1740739015581.jpg', 1, 1, 19, NULL, 0),
-(127, 'Футболка жіноча Nike', 14, 8, 1234.00, 3, 1, 'nfv-983462', 'img/women/clothes/tshirts/1740739081170.jpg', 1, 1, 19, NULL, 0),
+(127, 'Футболка жіноча Nike', 14, 8, 1234.00, 3, 1, 'nfv-983462', 'img/women/clothes/tshirts/1740739081170.jpg', 1, 1, 19, NULL, 1),
 (128, 'Шорти жіночі Perfect', 14, 9, 899.00, 3, 1, 'nfv-893452', 'img/women/clothes/shorts/1740739226679.jpg', 1, 1, 7, NULL, 0),
-(129, 'Шорти жіночі Nike', 3, 8, 567.00, 3, 2, 'nfv-5728327', 'img/women/clothes/shorts/1740739264547.jpg', 1, 1, 7, NULL, 0),
-(130, 'Шорти жіночі Adidas', 10, 4, 899.00, 1, 2, 'nfv-8935296', 'img/women/clothes/shorts/1740739321093.jpg', 1, 1, 7, NULL, 0),
+(129, 'Шорти жіночі Nike', 3, 8, 567.00, 3, 2, 'nfv-5728327', 'img/women/clothes/shorts/1740739264547.jpg', 1, 1, 7, NULL, 1),
+(130, 'Шорти жіночі Adidas', 10, 4, 899.00, 1, 2, 'nfv-8935296', 'img/women/clothes/shorts/1740739321093.jpg', 1, 1, 7, NULL, 1),
 (131, 'Штани жіночі Sincerely', 6, 9, 1123.00, 3, 1, 'nfv-438953', 'img/women/clothes/pants/1740739519537.jpg', 1, 1, 4, NULL, 0),
 (132, 'Штани жіночі Nike', 5, 8, 899.00, 1, 2, 'nfv-932578', 'img/women/clothes/pants/1740739561966.jpg', 1, 1, 4, NULL, 0),
-(133, 'Штани жіночі Adidas', 12, 4, 1599.00, 3, 2, 'nfv-893487', 'img/women/clothes/pants/1740739614069.jpg', 1, 1, 4, NULL, 0),
-(135, 'Тест3', 6, 6, 233.00, 1, 2, 'іваі', 'img/women/clothes/windbreakers/1740755806596.jpg', 1, 1, 52, NULL, 0);
+(133, 'Штани жіночі Adidas', 12, 4, 1599.00, 3, 2, 'nfv-893487', 'img/women/clothes/pants/1740739614069.jpg', 1, 1, 4, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -736,7 +739,7 @@ INSERT INTO `recipients` (`id`, `first_name`, `last_name`, `phone`, `patronymic`
 (10, '02', '02', '+380000000000', '02'),
 (11, 'пра', '', '+386767686787', ''),
 (12, 'р', '', '+38797898798', ''),
-(13, 'asdASD', 'asdASD', '+38345345345', 'ASDaSD'),
+(13, 'root', '', '+38345345345', ''),
 (14, 'asdsa', '', '+38123123123', ''),
 (15, 'dsfsdf', '', '+384353453454', ''),
 (16, 'root', '', '+38324234234', ''),
@@ -751,7 +754,9 @@ INSERT INTO `recipients` (`id`, `first_name`, `last_name`, `phone`, `patronymic`
 (25, 'Марія', '', '+380968765435', ''),
 (26, 'Марія', '', '+380986574835', ''),
 (27, 'Ліліан', '', '+38964563742', ''),
-(28, 'Роза', '', '+380967654325', '');
+(28, 'Роза', '', '+380967654325', ''),
+(29, 'Марія', '', '+38325435344', ''),
+(30, 'Марія', '', '+383243243534', '');
 
 -- --------------------------------------------------------
 
@@ -827,23 +832,23 @@ INSERT INTO `sizes` (`id`, `title`, `title_key`) VALUES
 (12, '66 / 4XL', 'clothes'),
 (13, '68 / 5XL', 'clothes'),
 (14, 'б/р', 'clothes'),
-(15, '40', 'headwear'),
-(16, '42', 'headwear'),
-(17, '44', 'headwear'),
-(18, '46', 'headwear'),
-(19, '48', 'headwear'),
-(20, '50', 'headwear'),
-(21, '52', 'headwear'),
-(22, '54', 'headwear'),
-(23, '56', 'headwear'),
-(24, '58', 'headwear'),
-(25, '60', 'headwear'),
-(26, 'XS', 'gloves'),
-(27, 'S', 'gloves'),
-(28, 'M', 'gloves'),
-(29, 'L', 'gloves'),
-(30, 'XL', 'gloves'),
-(31, 'XXL', 'gloves'),
+(15, '40', 'accessories'),
+(16, '42', 'accessories'),
+(17, '44', 'accessories'),
+(18, '46', 'accessories'),
+(19, '48', 'accessories'),
+(20, '50', 'accessories'),
+(21, '52', 'accessories'),
+(22, '54', 'accessories'),
+(23, '56', 'accessories'),
+(24, '58', 'accessories'),
+(25, '60', 'accessories'),
+(26, 'XS', 'accessories'),
+(27, 'S', 'accessories'),
+(28, 'M', 'accessories'),
+(29, 'L', 'accessories'),
+(30, 'XL', 'accessories'),
+(31, 'XXL', 'accessories'),
 (32, '35', 'shoes'),
 (33, '36', 'shoes'),
 (34, '37', 'shoes'),
@@ -881,8 +886,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone`, `email`, `password`, `role_id`, `patronymic`, `gender`, `birthday`, `city`) VALUES
-(1, 'root', NULL, NULL, 'root@sda.ch', '$2y$10$Rb..Z9toOkw.kKpOzB/UruXw11W/X5SVzeuwyvic8U0wjaa8lJM9i', 1, '', 'male', '1970-01-01 16:28:09', ''),
-(5, 'Іван', 'Шевченко', '+380961111111', 'ivan@gmail.com', '$2y$10$yXj69y/wzf.sMYZgn1CEleT/YQJsUDRW6VxnUzR6UJR2E6znSlO4u', 2, 'Петрович', 'male', '1970-02-14 00:00:00', 'Київ');
+(1, 'root', NULL, NULL, 'root@sda.ch', '$2y$10$Mp0F8ZYjt5F8xuQYTHGdIeoq.MZE4tew42SMCI8NlhS8w5rS8/SYq', 1, '', 'male', '1970-01-01 16:28:09', ''),
+(5, 'Іван', 'Шевченко', '+380961111111', 'ivan@gmail.com', '$2y$10$yXj69y/wzf.sMYZgn1CEleT/YQJsUDRW6VxnUzR6UJR2E6znSlO4u', 2, 'Петрович', 'male', '1970-02-14 00:00:00', 'Київ'),
+(18, 'Іван2', NULL, NULL, 'ivan2@gmail.com', '$2y$10$9NFFdaAeyPZs6xdCluRtHewGPHdJUx6bicY03JWyL1uq8wiGuFomK', 2, NULL, NULL, NULL, NULL);
 
 --
 -- Індекси збережених таблиць
@@ -1069,13 +1075,13 @@ ALTER TABLE `materials`
 -- AUTO_INCREMENT для таблиці `orderidproductid`
 --
 ALTER TABLE `orderidproductid`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT для таблиці `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT для таблиці `paymenttype`
@@ -1087,19 +1093,19 @@ ALTER TABLE `paymenttype`
 -- AUTO_INCREMENT для таблиці `productidsizeid`
 --
 ALTER TABLE `productidsizeid`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=309;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=315;
 
 --
 -- AUTO_INCREMENT для таблиці `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT для таблиці `recipients`
 --
 ALTER TABLE `recipients`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT для таблиці `reviews`
@@ -1123,7 +1129,7 @@ ALTER TABLE `sizes`
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Обмеження зовнішнього ключа збережених таблиць
