@@ -40,12 +40,12 @@ cd $FRONTEND_DIR
 if [ "$(git rev-parse HEAD)" != "$(git ls-remote origin -h refs/heads/main | awk '{print $1}')" ]; then
     echo "Внесено зміни в Frontend, перезапускаємо Frontend..."
     git pull origin main
-    sed -i "s|const localhostFrontend = 'http://localhost:5173';|//const localhostFrontend = 'http://localhost:5173';|" "$FRONTEND_DIR/src/App.jsx"
-    sed -i "s|//const localhost = 'https://192.168.0.113:8080';|const localhostFrontend = 'https://nfv.pp.ua';|" "$FRONTEND_DIR/src/App.jsx"
-    sed -i "s|const localhost = 'http://localhost:8888';|//const localhost = 'http://localhost:8888';|" "$FRONTEND_DIR/src/App.jsx"
-    sed -i "s|//const localhost = 'https://192.168.0.113:8080/api';|const localhost = 'https://nfv.pp.ua/api';|" "$FRONTEND_DIR/src/App.jsx"
     rm -rf $ROZETKA_DIR/frontend/*
     cp -r $FRONTEND_DIR/* $ROZETKA_DIR/frontend/
+    sed -i "s|const localhostFrontend = 'http://localhost:5173';|//const localhostFrontend = 'http://localhost:5173';|" "$ROZETKA_DIR/frontend/src/App.jsx"
+    sed -i "s|//const localhost = 'https://192.168.0.113:8080';|const localhostFrontend = 'https://nfv.pp.ua';|" "$ROZETKA_DIR/frontend/src/App.jsx"
+    sed -i "s|const localhost = 'http://localhost:8888';|//const localhost = 'http://localhost:8888';|" "$ROZETKA_DIR/frontend/src/App.jsx"
+    sed -i "s|//const localhost = 'https://192.168.0.113:8080/api';|const localhost = 'https://nfv.pp.ua/api';|" "$ROZETKA_DIR/frontend/src/App.jsx"
     cd $ROZETKA_DIR
     chown -R familybykov05:familybykov05 ./frontend/*
     chmod -R 777 ./frontend/node_modules
@@ -59,13 +59,13 @@ cd $BACKEND_DIR
 if [ "$(git rev-parse HEAD)" != "$(git ls-remote origin -h refs/heads/main | awk '{print $1}')" ]; then
     echo "Внесено зміни в Backend, перезапускаємо Backend..."
     git pull origin main
-    echo $TEXT > ./arctic-marking-450608-f8-6f543f6e3329.json
-    sed -i "s|'dsn' => 'mysql:host=localhost;dbname=clothes_store',|'dsn' => 'mysql:host=database;dbname=clothes_store',|" "$BACKEND_DIR/app/config.php"
-    sed -i "s|'user' => 'root',|'user' => trim(file_get_contents('/run/secrets/db_user')),|" "$BACKEND_DIR/app/config.php"
-    sed -i "s|'password' => '',|'password' => trim(file_get_contents('/run/secrets/db_password')),|" "$BACKEND_DIR/app/config.php"
     rm -rf $ROZETKA_DIR/backend/*
     cp -r $BACKEND_DIR/* $ROZETKA_DIR/backend/
+    sed -i "s|'dsn' => 'mysql:host=localhost;dbname=clothes_store',|'dsn' => 'mysql:host=database;dbname=clothes_store',|" "$ROZETKA_DIR/backend/app/config.php"
+    sed -i "s|'user' => 'root',|'user' => trim(file_get_contents('/run/secrets/db_user')),|" "$ROZETKA_DIR/backend/app/config.php"
+    sed -i "s|'password' => '',|'password' => trim(file_get_contents('/run/secrets/db_password')),|" "$ROZETKA_DIR/backend/app/config.php"
     cd $ROZETKA_DIR
+    echo $TEXT > ./arctic-marking-450608-f8-6f543f6e3329.json
     docker exec -it $DOCKER_BACKEND bash -c "rm -R /var/www/html/*"
     docker cp ./backend/. $DOCKER_BACKEND:/var/www/html/
     docker exec -it $DOCKER_BACKEND bash -c "apt-get update && apt-get install -y default-mysql-client && docker-php-ext-install mysqli pdo_mysql"
