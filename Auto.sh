@@ -68,6 +68,7 @@ if [ "$(git rev-parse HEAD)" != "$(git ls-remote origin -h refs/heads/main | awk
     cd $ROZETKA_DIR
     docker exec -it $DOCKER_BACKEND bash -c "rm -R /var/www/html/*"
     docker cp ./backend/. $DOCKER_BACKEND:/var/www/html/
+    docker exec -it $DOCKER_BACKEND bash -c "apt-get update && apt-get install -y default-mysql-client && docker-php-ext-install mysqli pdo_mysql"
     docker compose restart backend
 else
     echo "Ніяких змін в Backend, Backend не перезапускаємо."
@@ -82,8 +83,8 @@ if [ "$(git rev-parse HEAD)" != "$(git ls-remote origin -h refs/heads/main | awk
     rm $ROZETKA_DIR/database/clothes_store.sql
     cp $DATABASE_DIR/clothes_store.sql $ROZETKA_DIR/database/clothes_store.sql
     cd $ROZETKA_DIR
-    docker exec -it $DOCKER_DATABASE mysql -u $DATABASE_USER -p $DATABASE_PASS -e "DROP DATABASE clothes_store; CREATE DATABASE clothes_store;"
-    cat $ROZETKA_DIR/database/clothes_store.sql | docker exec -i $DOCKER_DATABASE mysql -u $DATABASE_USER -p $DATABASE_PASS clothes_store
+    docker exec -it $DOCKER_DATABASE mysql -u $DATABASE_USER -p$DATABASE_PASS -e "DROP DATABASE clothes_store; CREATE DATABASE clothes_store;"
+    cat $ROZETKA_DIR/database/clothes_store.sql | docker exec -i $DOCKER_DATABASE mysql -u $DATABASE_USER -p$DATABASE_PASS clothes_store
 else
     echo "Ніяких змін в Database, Database не перезапускаємо."
 fi
