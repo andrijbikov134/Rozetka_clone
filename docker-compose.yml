@@ -113,6 +113,8 @@ services:
     ports:
       - "443:443"
       - "80:80"
+    volumes:
+      - ./proxy/certs:/etc/nginx/certs
     depends_on:
       - frontend
       - backend
@@ -140,7 +142,7 @@ services:
     volumes:
       - ./monitoring/prometheus.yml:/prometheus/prometheus.yml
     ports:
-      - "9090:9090"
+      - "127.0.0.1:9090:9090"
     command:
       - "--web.external-url=/prometheus/"
     networks:
@@ -163,9 +165,11 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_AUTH_ANONYMOUS_ENABLED=false
       - GF_AUTH_DISABLE_SIGNUP=true
-      - GF_SERVER_ROOT_URL=https://192.168.0.113/grafana/
+      - GF_SERVER_ROOT_URL=https://nfv.pp.ua/grafana
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
       - GF_SERVER_PROTOCOL=https
+      - GF_SECURITY_CONTENT_SECURITY_POLICY=true
+      - GF_SECURITY_CONTENT_SECURITY_POLICY_TEMPLATE="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:;"
     volumes:
       - grafana-data:/var/lib/grafana
     networks:
