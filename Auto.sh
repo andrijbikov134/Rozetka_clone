@@ -18,7 +18,7 @@ DOCKER_DATABASE="rozetka_clone-database-1"
 DATABASE_USER="root"
 DATABASE_PASS="XXXXXXXXXXXXXXXXXXX"
 
-TEXT="{
+TEXT='{
   "type": "service_account",
   "project_id": "arctic-marking-450608-f8",
   "private_key_id": "6f543f6e33290efc1c1afbab5e2dac18515dade4",
@@ -30,7 +30,7 @@ TEXT="{
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/clothes-store-admin%40arctic-marking-450608-f8.iam.gserviceaccount.com",
   "universe_domain": "googleapis.com"
-}"
+}'
 
 # Оновлення репозиторіїв
 echo "Оновлення коду..."
@@ -65,10 +65,11 @@ if [ "$(git rev-parse HEAD)" != "$(git ls-remote origin -h refs/heads/main | awk
     sed -i "s|'user' => 'root',|'user' => trim(file_get_contents('/run/secrets/db_user')),|" "$ROZETKA_DIR/backend/app/config.php"
     sed -i "s|'password' => '',|'password' => trim(file_get_contents('/run/secrets/db_password')),|" "$ROZETKA_DIR/backend/app/config.php"
     cd $ROZETKA_DIR
-    echo $TEXT > ./arctic-marking-450608-f8-6f543f6e3329.json
+    echo $TEXT > ./backend/arctic-marking-450608-f8-6f543f6e3329.json
     docker exec -it $DOCKER_BACKEND bash -c "rm -R /var/www/html/*"
     docker cp ./backend/. $DOCKER_BACKEND:/var/www/html/
     docker exec -it $DOCKER_BACKEND bash -c "apt-get update && apt-get install -y default-mysql-client && docker-php-ext-install mysqli pdo_mysql"
+    docker exec -it $DOCKER_BACKEND bash -c "composer install --no-dev --optimize-autoloader && composer dump-autoload"
     docker compose restart backend
 else
     echo "Ніяких змін в Backend, Backend не перезапускаємо."
