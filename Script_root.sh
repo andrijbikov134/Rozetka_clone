@@ -53,7 +53,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout ./proxy/certs/selfsigned.key \
     -out ./proxy/certs/selfsigned.crt \
     -subj "/CN=localhost"
-openssl dhparam -out ./proxy/certs/dhparam.pem 2048
+openssl dhparam -out ./proxy/certs/dhparam.pem 4096
 
 #certbot --nginx -d nfv.pp.ua -d www.nfv.pp.ua --config-dir ./proxy/certs/ --work-dir ./proxy/certs-work --logs-dir ./proxy/certs-logs --non-interactive --agree-tos --email andrijbikov134@gmail.com 
 
