@@ -25,11 +25,18 @@ rm /etc/resolv.conf
 echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
 chattr +i /etc/resolv.conf
 
+sed -i "s|#Port 22|Port 57326|" "/etc/ssh/sshd_config"
+sed -i "s|#PubkeyAuthentication yes|PubkeyAuthentication yes|" "/etc/ssh/sshd_config"
+sed -i "s|#PasswordAuthentication yes|PasswordAuthentication no|" "/etc/ssh/sshd_config"
+sed -i "s|#PermitRootLogin|PermitRootLogin no #|" "/etc/ssh/sshd_config"
+sed -i "s|#MaxAuthTries 6|MaxAuthTries 3|" "/etc/ssh/sshd_config"
+sed -i "s|#MaxSessions 10|MaxSessions 2|" "/etc/ssh/sshd_config"
+
 apt install -y iptables-persistent
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+iptables -A INPUT -p tcp --dport 57326 -j ACCEPT
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
