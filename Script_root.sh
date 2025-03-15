@@ -46,6 +46,7 @@ systemctl enable iptables.service
 netfilter-persistent save
 systemctl status iptables.service
 
+apt install fail2ban debsecan needrestart -y
 
 apt install -y certbot python3-certbot-nginx
 
