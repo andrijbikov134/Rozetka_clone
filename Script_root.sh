@@ -2,6 +2,7 @@
 #echo "Введіть ваше ім'я:"
 #read username
 username="familybykov05"
+CRON_JOB="0 3 * * * /usr/bin/docker exec rozetka_clone-database-1 mysqldump -u root -p'XXXXXXXXXXXXXXXXXXX' clothes_store > /home/$username/Rozetka_clone/database/backup_crontab_\$(date +\%F).sql && /home/$username/Rozetka_clone/Auto.sh > /home/$username/Rozetka_clone/logs/Auto_upgrade_crontab_\$(date +\%F).log"
 
 #git clone https://github.com/andrijbikov134/Rozetka_clone.git
 #cd ./Rozetka_clone
@@ -70,6 +71,13 @@ cat ./proxy/.htpasswd
 
 chown -R ${username}:${username} ../Rozetka_clone
 chmod -R 777 ./frontend/node_modules
+
+if (crontab -l 2>/dev/null | grep -Fq "$CRON_JOB"); then
+    echo "Crontab entry already exists. Продовжуємо виконання скрипта..."
+else
+    (crontab -l 2>/dev/null; echo "$CRON_JOB") | crontab -
+    echo "Новий запис додано в crontab!"
+fi
 
 echo "END"
 
