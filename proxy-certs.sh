@@ -11,3 +11,4 @@ docker exec -it rozetka_clone-proxy-1 bash -c "certbot --nginx -d nfv.pp.ua -d w
 sed -i "s|ssl_certificate /etc/nginx/certs/selfsigned.crt;|ssl_certificate $LE_CERT;|" "./proxy/nginx.conf"
 sed -i "s|ssl_certificate_key /etc/nginx/certs/selfsigned.key;|ssl_certificate_key $LE_KEY;|" "./proxy/nginx.conf"
 docker compose restart proxy
+docker logs rozetka_clone-proxy-1 --follow >> /var/log/nginx/access.log 2>&1 &

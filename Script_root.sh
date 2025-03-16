@@ -2,7 +2,8 @@
 #echo "Введіть ваше ім'я:"
 #read username
 username="familybykov05"
-CRON_JOB="0 3 * * * /usr/bin/docker exec rozetka_clone-database-1 mysqldump -u root -p'XXXXXXXXXXXXXXXXXXX' clothes_store > /home/$username/Rozetka_clone/database/backup_crontab_\$(date +\%F).sql && /home/$username/Rozetka_clone/Auto.sh > /home/$username/Rozetka_clone/logs/Auto_upgrade_crontab_\$(date +\%F).log"
+CRON_JOB="0 3 * * * /usr/bin/docker exec rozetka_clone-database-1 mysqldump -u root -p'XXXXXXXXXXXXXXXXXXX' clothes_store > /home/$username/Rozetka_clone/database/backup_crontab_\$(date +\%F).sql && /home/$username/Rozetka_clone/Auto.sh > /home/$username/Rozetka_clone/logs/Auto_upgrade_crontab_\$(date +\%F).log
+0 4 * * * /home/familybykov05/Rozetka_clone/log.sh"
 
 #git clone https://github.com/andrijbikov134/Rozetka_clone.git
 #cd ./Rozetka_clone
@@ -48,6 +49,37 @@ netfilter-persistent save
 systemctl status iptables.service
 
 apt install fail2ban debsecan needrestart -y
+
+systemctl enable fail2ban
+echo '[Definition]
+failregex = <HOST> .* "(GET|POST) /(.*)\.env"
+            <HOST> .* "(GET|POST) /(.*)dump.sql"
+            <HOST> .* "(GET|POST) /wp-login.php"
+ignoreregex =' > /etc/fail2ban/filter.d/custom.conf
+echo '[sshd]
+enabled = true
+port = 57326
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+bantime = 600
+[nginx-badbots]
+enabled  = true
+port     = http,https
+filter   = nginx-badbots
+logpath  = /var/log/nginx/access.log
+maxretry = 10
+bantime  = 3600
+[custom]
+enabled = true
+filter = custom
+logpath = /var/log/nginx/access.log
+bantime = 3600
+maxretry = 3' > /etc/fail2ban/jail.local
+systemctl restart fail2ban
+fail2ban-client status
+
+
 
 apt install -y certbot python3-certbot-nginx
 
