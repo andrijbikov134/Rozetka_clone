@@ -61,6 +61,18 @@ failregex = <HOST> -.* "(GET|POST).*wp-login.php.*"
             <HOST> -.* "(GET|POST).*login.php.*"
             <HOST> -.* "(GET|POST).*setup.php.*"
             <HOST> -.* "(GET|POST).*phpmyadmin.*"
+            <HOST> -.* "(GET|POST).*\.git.*"
+            <HOST> -.* "(GET|POST).*config\.json.*"
+            <HOST> -.* "(GET|POST).*database\.yml.*"
+
+            <HOST> -.* "User-Agent:.*zgrab.*"
+            <HOST> -.* "User-Agent:.*Keydrop.*"
+            <HOST> -.* "User-Agent:.*curl.*"
+            <HOST> -.* "User-Agent:.*Palo Alto.*"
+            <HOST> -.* "User-Agent:.*masscan.*"
+            <HOST> -.* "User-Agent:.*nikto.*"
+            <HOST> -.* "User-Agent:.*sqlmap.*"
+            <HOST> -.* "User-Agent:.*nmap.*"
 
 ignoreregex =' > /etc/fail2ban/filter.d/nginx-badbots.conf
 echo '[Definition]
@@ -82,8 +94,8 @@ enabled  = true
 port     = http,https
 filter   = nginx-badbots
 logpath  = /var/log/nginx/access.log
-maxretry = 3
-bantime  = 3600
+maxretry = 1
+bantime  = 36000
 action = iptables-multiport[name=HTTP, port="http,https", protocol=tcp]
 
 [nginx-limit-req]
