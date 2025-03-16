@@ -92,7 +92,7 @@ port = http,https
 filter = nginx-limit-req
 logpath = /var/log/nginx/access.log
 findtime = 60
-maxretry = 500
+maxretry = 750
 bantime = 3600
 action = iptables-multiport[name=HTTP, port="http,https", protocol=tcp]' > /etc/fail2ban/jail.local
 systemctl restart fail2ban
