@@ -52,10 +52,21 @@ apt install fail2ban debsecan needrestart -y
 
 systemctl enable fail2ban
 echo '[Definition]
-failregex = <HOST> .* "(GET|POST) /(.*)\.env"
-            <HOST> .* "(GET|POST) /(.*)dump.sql"
-            <HOST> .* "(GET|POST) /wp-login.php"
-ignoreregex =' > /etc/fail2ban/filter.d/custom.conf
+
+failregex = <HOST> -.* "(GET|POST).*wp-login.php.*"
+            <HOST> -.* "(GET|POST).*xmlrpc.php.*"
+            <HOST> -.* "(GET|POST).*\.env.*"
+            <HOST> -.* "(GET|POST).*dump.sql.*"
+            <HOST> -.* "(GET|POST).*admin.php.*"
+            <HOST> -.* "(GET|POST).*login.php.*"
+            <HOST> -.* "(GET|POST).*setup.php.*"
+            <HOST> -.* "(GET|POST).*phpmyadmin.*"
+
+ignoreregex =' > /etc/fail2ban/filter.d/nginx-badbots.conf
+echo '[Definition]
+failregex = ^<HOST> - .* "GET /.* HTTP/1.1"
+ignoreregex =' > /etc/fail2ban/filter.d/nginx-limit-req.conf
+
 echo '[sshd]
 enabled = true
 port = 57326
@@ -63,22 +74,28 @@ filter = sshd
 logpath = /var/log/auth.log
 maxretry = 3
 bantime = 600
+action = iptables-multiport[name=SSH, port="57326", protocol=tcp]
+
 [nginx-badbots]
 enabled  = true
 port     = http,https
 filter   = nginx-badbots
 logpath  = /var/log/nginx/access.log
-maxretry = 10
+maxretry = 3
 bantime  = 3600
-[custom]
+action = iptables-multiport[name=HTTP, port="http,https", protocol=tcp]
+
+[nginx-limit-req]
 enabled = true
-filter = custom
+port = http,https
+filter = nginx-limit-req
 logpath = /var/log/nginx/access.log
+findtime = 60
+maxretry = 500
 bantime = 3600
-maxretry = 3' > /etc/fail2ban/jail.local
+action = iptables-multiport[name=HTTP, port="http,https", protocol=tcp]' > /etc/fail2ban/jail.local
 systemctl restart fail2ban
 fail2ban-client status
-
 
 
 apt install -y certbot python3-certbot-nginx
