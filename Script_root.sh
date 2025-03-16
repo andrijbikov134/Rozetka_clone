@@ -65,6 +65,7 @@ failregex = <HOST> -.* "(GET|POST).*wp-login.php.*"
 ignoreregex =' > /etc/fail2ban/filter.d/nginx-badbots.conf
 echo '[Definition]
 failregex = ^<HOST> - .* "GET /.* HTTP/1.1"
+            ^<HOST> - .* "POST /.* HTTP/1.1"
 ignoreregex =' > /etc/fail2ban/filter.d/nginx-limit-req.conf
 
 echo '[sshd]
@@ -96,7 +97,6 @@ bantime = 3600
 action = iptables-multiport[name=HTTP, port="http,https", protocol=tcp]' > /etc/fail2ban/jail.local
 systemctl restart fail2ban
 fail2ban-client status
-
 
 apt install -y certbot python3-certbot-nginx
 
