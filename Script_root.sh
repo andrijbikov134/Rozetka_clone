@@ -2,8 +2,12 @@
 #echo "Введіть ваше ім'я:"
 #read username
 username="familybykov05"
-CRON_JOB="0 3 * * * /usr/bin/docker exec rozetka_clone-database-1 mysqldump -u root -p'XXXXXXXXXXXXXXXXXXX' clothes_store > /home/$username/Rozetka_clone/database/backup_crontab_\$(date +\%F).sql && /home/$username/Rozetka_clone/Auto.sh > /home/$username/Rozetka_clone/logs/Auto_upgrade_crontab_\$(date +\%F).log
-0 4 * * * /home/familybykov05/Rozetka_clone/log.sh"
+CRON_JOB="
+0 3 * * * /usr/bin/docker exec rozetka_clone-database-1 mysqldump -u root -p'XXXXXXXXXXXXXXXXXXX' clothes_store > /home/familybykov05/Rozetka_clone/database/backup_crontab_$(date +\%F).sql
+* * * * * /home/familybykov05/Rozetka_clone/Auto.sh >> /home/familybykov05/Rozetka_clone/logs/Auto_upgrade_crontab_$(date +\%F).log
+0 0 * * * rm /home/familybykov05/Rozetka_clone/logs/Auto_upgrade_crontab_*.log
+0 4 * * * /home/familybykov05/Rozetka_clone/log.sh
+"
 
 #git clone https://github.com/andrijbikov134/Rozetka_clone.git
 #cd ./Rozetka_clone
@@ -93,16 +97,16 @@ action = iptables-multiport[name=SSH, port="57326", protocol=tcp]
 enabled  = true
 port     = http,https
 filter   = nginx-badbots
-logpath  = /var/log/nginx/access.log
+logpath  = /var/log/nginx/access.log*
 maxretry = 1
-bantime  = 36000
+bantime  = 360000
 action = iptables-multiport[name=HTTP, port="http,https", protocol=tcp]
 
 [nginx-limit-req]
 enabled = true
 port = http,https
 filter = nginx-limit-req
-logpath = /var/log/nginx/access.log
+logpath = /var/log/nginx/access.log*
 findtime = 60
 maxretry = 750
 bantime = 3600
