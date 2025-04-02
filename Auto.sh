@@ -5,7 +5,7 @@ BACKEND_REPO="git@github.com:andrijbikov134/Rozetka_clone_Backend.git"
 DATABASE_REPO="git@github.com:andrijbikov134/Rozetka_clone_Database.git"
 ROZETKA_REPO="git@github.com:andrijbikov134/Rozetka_clone.git"
 
-WORKDIR="/home/familybykov05/"
+WORKDIR="/home/familybykov05"
 FRONTEND_DIR="$WORKDIR/Rozetka_clone_Frontend"
 BACKEND_DIR="$WORKDIR/Rozetka_clone_Backend"
 DATABASE_DIR="$WORKDIR/Rozetka_clone_Database"
@@ -84,8 +84,8 @@ if [ "$(git rev-parse HEAD)" != "$(git ls-remote origin -h refs/heads/main | awk
     rm $ROZETKA_DIR/database/clothes_store.sql
     cp $DATABASE_DIR/clothes_store.sql $ROZETKA_DIR/database/clothes_store.sql
     cd $ROZETKA_DIR
-    docker exec -it $DOCKER_DATABASE mysql -u $DATABASE_USER -p$DATABASE_PASS -e "DROP DATABASE clothes_store; CREATE DATABASE clothes_store;"
-    cat $ROZETKA_DIR/database/clothes_store.sql | docker exec -i $DOCKER_DATABASE mysql -u $DATABASE_USER -p$DATABASE_PASS clothes_store
+    docker exec -it rozetka_clone-database-1 mysql -u root -pXXXXXXXXXXXXXXXXXXX -e "DROP DATABASE clothes_store; CREATE DATABASE clothes_store;"
+    cat /home/familybykov05/Rozetka_clone/database/clothes_store.sql | docker exec -i rozetka_clone-database-1 mysql -u root -pXXXXXXXXXXXXXXXXXXX clothes_store
 else
     echo "Ніяких змін в Database, Database не перезапускаємо."
 fi

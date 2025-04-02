@@ -4,7 +4,7 @@
 username="familybykov05"
 CRON_JOB="
 0 3 * * * /usr/bin/docker exec rozetka_clone-database-1 mysqldump -u root -p'XXXXXXXXXXXXXXXXXXX' clothes_store > /home/familybykov05/Rozetka_clone/database/backup_crontab_$(date +\%F).sql
-* * * * * /home/familybykov05/Rozetka_clone/Auto.sh >> /home/familybykov05/Rozetka_clone/logs/Auto_upgrade_crontab_$(date +\%F).log
+*/10 * * * * /home/familybykov05/Rozetka_clone/Auto.sh >> /home/familybykov05/Rozetka_clone/logs/Auto_upgrade_crontab_$(date +\%F).log
 0 0 * * * rm /home/familybykov05/Rozetka_clone/logs/Auto_upgrade_crontab_*.log
 0 4 * * * /home/familybykov05/Rozetka_clone/log.sh
 "
